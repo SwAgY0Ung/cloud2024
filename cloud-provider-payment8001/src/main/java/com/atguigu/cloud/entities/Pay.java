@@ -1,5 +1,7 @@
 package com.atguigu.cloud.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
@@ -9,7 +11,7 @@ import javax.persistence.*;
  * 表注释：支付交易表
 */
 @Table(name = "t_pay")
-public class TPay {
+public class Pay {
     @Id
     @GeneratedValue(generator = "JDBC")
     private Integer id;
@@ -46,12 +48,14 @@ public class TPay {
      * 创建时间
      */
     @Column(name = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     /**
      * 更新时间
      */
     @Column(name = "update_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     /**
