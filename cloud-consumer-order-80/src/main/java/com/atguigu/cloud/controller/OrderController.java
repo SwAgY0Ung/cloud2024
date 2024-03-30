@@ -17,7 +17,9 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class OrderController {
 
-    public static final String PaymentSrv_URL = "http://localhost:8001";//先写死，后面引入nacos可以注册和发现其他服务
+//    public static final String PaymentSrv_URL = "http://localhost:8001";
+    //引入consul之后直接使用服务名就可以
+    private String PaymentSrv_URL = "http://cloud-payment-service:8001";
 
     @Resource
     private RestTemplate restTemplate;

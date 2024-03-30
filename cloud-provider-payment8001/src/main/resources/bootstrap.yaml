@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: cloud-payment-service
+
+  cloud:
+    #consul的服务注册
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+    #consul的配置中心
+      config:
+        profile-separator: '-' #文件名中名字的分隔符 默认用"," 这里改为"-" 更符合中国程序员的编程习惯
+        format: YAML #配置的格式
