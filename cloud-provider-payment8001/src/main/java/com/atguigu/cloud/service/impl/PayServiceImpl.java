@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Echo
@@ -27,6 +28,11 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public List<Pay> getAll() {
+        try {
+            TimeUnit.SECONDS.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return mapper.selectAll();
     }
 

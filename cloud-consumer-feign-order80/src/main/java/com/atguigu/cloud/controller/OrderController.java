@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -27,7 +28,15 @@ public class OrderController {
 
     @GetMapping("/getAll")
     public ResultData getAll() {
-        return payFeignApi.getAll();
+        ResultData resultData;
+        System.out.println("服务调用开始"+ LocalDateTime.now());
+        try {
+            resultData = payFeignApi.getAll();
+        } catch (Exception e) {
+            System.out.println("服务调用结束"+ LocalDateTime.now());
+            return ResultData.fail("62","调用超时");
+        }
+        return resultData;
     }
 
 }
