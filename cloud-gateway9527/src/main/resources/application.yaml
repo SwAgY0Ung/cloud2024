@@ -1,0 +1,40 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        service-name: ${spring.application.name}
+    gateway:
+      routes:
+        - id: payment_service
+          uri: lb://cloud-payment-service # 第二种写法：路由的目标地址 http就是固定地址
+          predicates:
+            - Path=/payment/** # 注意使用本服务测试需要开启下面的过滤器截取path，不然拼接的路径无效
+            - Cookie=chocolate,ch.p
+            - Header=X-Request-Id, \d+ #请求头要有X-Request-Id属性并且值为正数的正则表达式
+            - Host=**.somehost.org,**.anotherhost.org
+            - Query=green
+            - RemoteAddr=192.168.1.1/24
+          filters:
+            - StripPrefix=1 #这个过滤器很重要！写了这个过滤器，网关匹配到再去访问的时候，会去掉Path中的一级路径
+
+        - id: pay_routh3 #pay_routh3
+          uri: lb://cloud-payment-service                #匹配后提供服务的路由地址
+          predicates:
+            - Path=/gateway/filter/**              # 断言，路径相匹配的进行路由
+          filters:
+#            - AddRequestHeader=X-Request-atguigu1,atguiguValue1  # 请求头kv，若一头含有多参则重写一行设置
+#            - AddRequestHeader=X-Request-atguigu2,atguiguValue2
+#            - RemoveRequestHeader=sec-fetch-site
+#            - AddRequestParameter=customerId,9527001 # 新增请求参数Parameter：k ，v
+#            - RemoveRequestParameter=customerName   # 删除url请求参数customerName，你传递过来也是null
+#            - PrefixPath=/pay # 给请求路径前面加上/pay
+#            - SetPath=/pay/gateway/{setment}
+            - RedirectTo=302, http://www.baidu.com

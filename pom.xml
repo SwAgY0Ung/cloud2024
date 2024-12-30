@@ -16,6 +16,9 @@
         <module>cloud-consumer-order80</module>
         <module>cloud-api-commons</module>
         <module>cloud-consumer-feign-order80</module>
+        <module>cloud-gateway9527</module>
+        <module>cloudalibaba-provider-payment9001</module>
+        <module>cloudalibaba-consumer-nacos-order83</module>
     </modules>
 
 <!--    管理版本的地方-->
