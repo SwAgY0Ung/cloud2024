@@ -8,6 +8,8 @@ spring:
     nacos:
       discovery:
         server-addr: 101.42.230.55:8848
+        username: nacos
+        password: nacos
 #        namespace: yhy-namespace
 #        group: yhy-group
 #消费者将要去访问的微服务名称(nacos微服务提供者叫什么你写什么)
