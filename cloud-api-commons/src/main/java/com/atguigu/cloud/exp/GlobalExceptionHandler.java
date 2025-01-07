@@ -22,12 +22,12 @@ public class GlobalExceptionHandler {
      * @param e 异常
      * @return resultData
      */
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultData<String> exception(Exception e) {
         System.out.println("####come in GlobalExceptionHandler");
         log.error("全局异常信息:{}", e.getMessage(), e);
-        return ResultData.fail(ReturnCodeEnum.RC500.getCode(), ReturnCodeEnum.RC500.getMessage());
+        return ResultData.fail(ReturnCodeEnum.RC500.getCode(), e.getMessage());
     }
 
 }
