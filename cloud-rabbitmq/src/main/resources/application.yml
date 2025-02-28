@@ -1,0 +1,12 @@
+server:
+  port: 7899
+
+spring:
+  application:
+    name: rabbitmq
+  rabbitmq:
+    host: 101.42.230.55
+    port: 5672
+    virtual-host: /
+    username: admin
+    password: yhy
